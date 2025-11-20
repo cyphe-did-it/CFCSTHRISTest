@@ -27,6 +27,6 @@ namespace HRIS.Domain.Entities.Common
         public DateTimeOffset? UpdatedDate { get; set; }
         public DateTimeOffset? DeletedDate { get; set; }
         public Guid? UserId { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
     }
 }
