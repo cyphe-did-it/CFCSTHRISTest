@@ -65,6 +65,60 @@ namespace HRIS.Infrastructure.Persistence
                       .WithOne(ei => ei.Employee)
                       .HasForeignKey(ei => ei.EmployeeID);
             });
+
+            // EmployeeIdentification:
+            modelBuilder.Entity<EmployeeIdentification>(entity =>
+            {
+                entity.HasKey(ei => ei.EmployeeIdentificationID);
+
+                entity.Property(ei => ei.IdentificationNumber)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.Property(ei => ei.IssuedDate)
+                    .IsRequired();
+
+                entity.Property(ei => ei.ExpiredDate)
+                    .IsRequired(false);
+
+                entity.Property(ei => ei.IssuedPlace)
+                    .IsRequired()
+                    .HasMaxLength(150);
+
+                entity.HasOne(ei => ei.IdentificationType)
+                      .WithMany(it => it.EmployeeIdentifications)
+                      .HasForeignKey(ei => ei.IdentificationTypeID);
+            });
+
+            // CivilStatus:
+            modelBuilder.Entity<CivilStatus>(entity =>
+            {
+                entity.HasKey(cs => cs.CivilStatusID);
+
+                entity.Property(cs => cs.StatusDescription)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(cs => cs.StatusCode)
+                    .IsRequired();
+
+            });
+
+            // IdentificationType:
+            modelBuilder.Entity<IdentificationType>(entity =>
+            {
+                entity.HasKey(it => it.IdentificationTypeID);
+
+                entity.Property(it => it.Type)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(it => it.Description)
+                    .IsRequired()
+                    .HasMaxLength(200);
+            });
+
+
         }
 
     }
