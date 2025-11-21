@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /HRIS.WebAPI/appsettings.json
 /HRIS.WebAPI/appsettings.json
+/HRIS.WebAPI/appsettings.Development.json
