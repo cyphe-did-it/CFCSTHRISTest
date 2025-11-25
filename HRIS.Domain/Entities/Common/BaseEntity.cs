@@ -11,3 +11,4 @@ namespace HRIS.Domain.Entities.Common
         public Guid Id { get; set; }
     }
 }
+    

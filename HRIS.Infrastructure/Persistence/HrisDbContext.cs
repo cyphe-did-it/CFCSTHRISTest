@@ -28,120 +28,19 @@ namespace HRIS.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Fluent API configurations
-
-            // Employee:
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.ToTable("Employees", "hris");
-
-                entity.HasKey(e => e.EmployeeID);
-
-                entity.Property(e => e.EmploymentID)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(e => e.ExtensionName)
-                    .HasMaxLength(10);
 
 
-                entity.Property(e => e.BirthDate)
-                    .IsRequired();
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HRISDbContext).Assembly);
 
-                entity.Property(e => e.BirthPlace)
-                    .IsRequired()
-                    .HasMaxLength(150);
 
-                entity.Property(e => e.SexAtBirth)
-                    .IsRequired()
-                    .HasMaxLength(1);
+            // applying entity filters (for transfer if madami na):
+            modelBuilder.Entity<Employee>()
+                .HasQueryFilter(e => e.IsActive);
 
-                // Index
-                entity.HasIndex(e => e.EmploymentID)
-                    .IsUnique();
+            modelBuilder.Entity<EmployeeIdentification>()
+                .HasQueryFilter(ei => ei.IsActive);
 
-                // FKs/Relationships
-                entity.HasOne(e => e.CivilStatus)
-                      .WithMany(cs => cs.Employees)
-                      .HasForeignKey(e => e.CivilStatusID);
-
-                entity.HasMany(e => e.EmployeeIdentifications)
-                      .WithOne(ei => ei.Employee)
-                      .HasForeignKey(ei => ei.EmployeeID);
-            });
-
-            // EmployeeIdentification:
-            modelBuilder.Entity<EmployeeIdentification>(entity =>
-            {
-                entity.ToTable("EmployeeIdentifications", "hris");
-
-                entity.HasKey(ei => ei.EmployeeIdentificationID);
-
-                entity.Property(ei => ei.IdentificationNumber)
-                    .IsRequired()
-                    .HasMaxLength(100);
-
-                entity.Property(ei => ei.IssuedDate)
-                    .IsRequired();
-
-                entity.Property(ei => ei.ExpiredDate)
-                    .IsRequired(false);
-
-                entity.Property(ei => ei.IssuedPlace)
-                    .IsRequired()
-                    .HasMaxLength(150);
-
-                // Index
-                entity.HasIndex(ei => new { ei.EmployeeID, ei.IdentificationTypeID })
-                      .IsUnique();
-
-                // FKs/Relationships
-                entity.HasOne(ei => ei.IdentificationType)
-                      .WithMany(it => it.EmployeeIdentifications)
-                      .HasForeignKey(ei => ei.IdentificationTypeID);
-            });
-
-            // CivilStatus:
-            modelBuilder.Entity<CivilStatus>(entity =>
-            {
-                entity.ToTable("CivilStatuses", "lookup");
-
-                entity.HasKey(cs => cs.CivilStatusID);
-
-                entity.Property(cs => cs.StatusDescription)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(cs => cs.StatusCode)
-                    .IsRequired()
-                    .HasMaxLength(10);
-
-            });
-
-            // IdentificationType:
-            modelBuilder.Entity<IdentificationType>(entity =>
-            {
-                entity.ToTable("IdentificationTypes", "lookup");
-
-                entity.HasKey(it => it.IdentificationTypeID);
-
-                entity.Property(it => it.Type)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(it => it.Description)
-                    .IsRequired()
-                    .HasMaxLength(200);
-            });
-
+            
 
         }
 

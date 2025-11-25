@@ -1,21 +1,19 @@
-﻿using HRIS.Domain.Entities.Common;
-using HRIS.Domain.Entities.Domain.Lookup;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRIS.Domain.Entities.Domain.HRIS
+namespace HRIS.Application.Features.Employees.Commands.CreateEmployee
 {
-    public class Employee : BaseAuditableEntity
+    public class CreateEmployeeCommand : IRequest<Guid>
     {
-        public Guid EmployeeID { get; set; }
         public string EmploymentID { get; set; } = null!;
         public string FirstName { get; set; } = null!;
-        public string MiddleName { get; set; } = string.Empty;
+        public string? MidlleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string ExtensionName { get; set; } = string.Empty;
+        public string? ExtensionName { get; set; }
 
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; } = null!;
@@ -25,11 +23,5 @@ namespace HRIS.Domain.Entities.Domain.HRIS
         public bool IsFilipino { get; set; }
         public bool IsDualCitizen { get; set; }
         public string ImageSource { get; set; } = string.Empty;
-
-
-        // Navigation Properties
-        public CivilStatus? CivilStatus { get; set; }
-        public ICollection<EmployeeIdentification> EmployeeIdentifications { get; set; } = new List<EmployeeIdentification>();
-
     }
 }

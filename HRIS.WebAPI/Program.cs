@@ -1,3 +1,4 @@
+using HRIS.Application.Features.Employees.Commands.CreateEmployee;
 using HRIS.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,10 @@ builder.Services.AddSwaggerGen();
 // Register DbContext with SQL Server provider
 builder.Services.AddDbContext<HRISDbContext>(options =>
     options.UseSqlServer(connectionString));
+
+// Services:
+builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssembly(typeof(CreateEmployeeCommand).Assembly));
+
 
 var app = builder.Build();
 
