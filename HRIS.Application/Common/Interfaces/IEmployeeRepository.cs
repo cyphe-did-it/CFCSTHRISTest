@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace HRIS.Application.Common.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository : IBaseAsyncRepository<Employee>
     {
-        Task<Employee?> GetEmployeeByIdAsync(Guid employeeId, CancellationToken cancellationToken );
-        Task<bool> EmploymentIdExistsAsync(string employmentId, CancellationToken cancellationToken );
-        Task AddAsync(Employee employee, CancellationToken cancellationToken);
+        //Task<Employee?> GetEmployeeByIdAsync(Guid employeeId, CancellationToken cancellationToken );
+        //Task<bool> EmploymentIdExistsAsync(string employmentId, CancellationToken cancellationToken );
+        //Task AddAsync(Employee employee, CancellationToken cancellationToken);
     }
 }
