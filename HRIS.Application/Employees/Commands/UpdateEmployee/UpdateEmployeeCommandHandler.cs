@@ -42,6 +42,8 @@ namespace HRIS.Application.Employees.Commands.UpdateEmployee
             employee.IsDualCitizen = request.IsDualCitizen;
             employee.ImageSource = request.ImageSource;
 
+            // This is temporary, replace "system" with actual user
+            employee.MarkUpdated("system");
 
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
 

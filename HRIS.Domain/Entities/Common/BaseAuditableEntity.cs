@@ -50,5 +50,14 @@ namespace HRIS.Domain.Entities.Common
             UpdatedBy = user;
             UpdatedDate = DateTimeOffset.UtcNow;
         }
+
+        public void Reactivate(string? user = null)
+        {
+            IsActive = true;
+            DeletedBy = null;
+            DeletedDate = null;
+
+            MarkUpdated(user);
+        }
     }
 }

@@ -14,6 +14,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using HRIS.Application.Common.Model;
 using HRIS.WebAPI.Contracts.Employee;
+using HRIS.Application.Employees.Commands.ReactivateEmployee;
 
 
 
@@ -45,7 +46,7 @@ namespace HRIS.WebAPI.Controllers.Common
         // Query: Get by ID
         [HttpGet("{employeeId:guid}")]
         public async Task<ActionResult<EmployeeDetailDTO>> GetEmployeeById(
-            Guid employeeId, 
+            Guid employeeId,
             CancellationToken cancellationToken)
         {
             var query = new GetEmployeeByIDQuery
@@ -64,7 +65,7 @@ namespace HRIS.WebAPI.Controllers.Common
         // Command: Create
         [HttpPost]
         public async Task<IActionResult> CreateEmployee(
-            [FromBody] CreateEmployeeRequest request, 
+            [FromBody] CreateEmployeeRequest request,
             CancellationToken cancellationToken)
         {
             var command = new CreateEmployeeCommand
@@ -91,8 +92,8 @@ namespace HRIS.WebAPI.Controllers.Common
         // Command: Update
         [HttpPut("{employeeId:guid}")]
         public async Task<IActionResult> UpdateEmployee(
-            Guid employeeId, 
-            [FromBody] UpdateEmployeeRequest request, 
+            Guid employeeId,
+            [FromBody] UpdateEmployeeRequest request,
             CancellationToken cancellationToken)
         {
             if (employeeId != request.EmployeeID)
@@ -129,7 +130,7 @@ namespace HRIS.WebAPI.Controllers.Common
         // Command: Delete
         [HttpDelete("{employeeId:guid}")]
         public async Task<IActionResult> DeleteEmployee(
-            Guid employeeId, 
+            Guid employeeId,
             CancellationToken cancellationToken)
         {
             var command = new DeleteEmployeeCommand
@@ -143,6 +144,24 @@ namespace HRIS.WebAPI.Controllers.Common
                 return NotFound();
             }
 
+            return NoContent();
+        }
+
+        // Command : Reactivate
+        [HttpPost("{employeeId:guid}/reactivate")]
+        public async Task<IActionResult> ReactivateEmployee(
+            Guid employeeId,
+            CancellationToken cancellationToken)
+        {
+            var command = new ReactivateEmployeeCommand
+            {
+                EmployeeID = employeeId
+            };
+            var result = await _mediator.Send(command, cancellationToken);
+            if (!result)
+            {
+                return NotFound();
+            }
             return NoContent();
         }
     }

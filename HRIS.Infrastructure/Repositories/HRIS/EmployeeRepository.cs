@@ -43,8 +43,6 @@ namespace HRIS.Infrastructure.Repositories.HRIS
 
         public async Task UpdateAsync(Employee employee, CancellationToken cancellationToken)
         {
-            // This is temporary, replace "system" with actual user
-            employee.MarkUpdated("system");
 
             _context.Employees.Update(employee);
             await _context.SaveChangesAsync(cancellationToken);
@@ -60,9 +58,6 @@ namespace HRIS.Infrastructure.Repositories.HRIS
         // Delete Operation - Soft Delete
         public async Task SoftDeleteAsync(Employee employee, CancellationToken cancellationToken = default)
         {
-            // This is temporary, replace "system" with actual user
-            employee.SoftDelete("system");
-
             _context.Employees.Update(employee);
             await _context.SaveChangesAsync(cancellationToken);
         }
