@@ -10,5 +10,6 @@ namespace HRIS.Application.Employees.Commands.DeleteEmployee
     public class DeleteEmployeeCommand : IRequest<bool>
     {
         public Guid EmployeeID { get; set; }
+        public string? DeletedReason { get; set; }
     }
 }

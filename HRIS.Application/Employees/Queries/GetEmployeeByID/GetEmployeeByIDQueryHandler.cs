@@ -41,7 +41,10 @@ namespace HRIS.Application.Employees.Queries.GetEmployeeByID
                 CivilStatusID = employee.CivilStatusID,
                 IsFilipino = employee.IsFilipino,
                 IsDualCitizen = employee.IsDualCitizen,
-                ImageSource = employee.ImageSource
+                ImageSource = employee.ImageSource,
+
+                // Assuming IsActive is determined by some logic in the employee entity
+                DeletedReason = employee.DeletedReason,
             };
             return employeeDetailDTO;
         }

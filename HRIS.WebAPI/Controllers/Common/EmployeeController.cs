@@ -131,11 +131,13 @@ namespace HRIS.WebAPI.Controllers.Common
         [HttpDelete("{employeeId:guid}")]
         public async Task<IActionResult> DeleteEmployee(
             Guid employeeId,
+            [FromBody] DeleteEmployeeRequest request,
             CancellationToken cancellationToken)
         {
             var command = new DeleteEmployeeCommand
             {
-                EmployeeID = employeeId
+                EmployeeID = employeeId,
+                DeletedReason = request.DeletedReason
             };
 
             var result = await _mediator.Send(command, cancellationToken);

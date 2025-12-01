@@ -28,7 +28,7 @@ namespace HRIS.Application.Employees.Commands.DeleteEmployee
             }
 
             // This is temporary, replace "system" with actual user
-            employee.SoftDelete("system");
+            employee.SoftDelete("system", request.DeletedReason);
 
             await _employeeRepository.SoftDeleteAsync(employee, cancellationToken);
             return true; 

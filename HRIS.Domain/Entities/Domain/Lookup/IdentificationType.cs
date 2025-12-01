@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HRIS.Domain.Entities.Domain.Lookup
 {
-    public class IdentificationType : BaseAuditableEntity
+    public class IdentificationType
     {
         public int IdentificationTypeID { get; set; }
         public string Type { get; set; } = string.Empty;

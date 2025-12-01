@@ -21,5 +21,10 @@ namespace HRIS.Application.Employees.DTOs
         public bool IsFilipino { get; set; }
         public bool IsDualCitizen { get; set; }
         public string? ImageSource { get; set; }
+
+
+        // added fields for detail view
+        public bool IsActive { get; set; }
+        public string? DeletedReason { get; set; }
     }
 }

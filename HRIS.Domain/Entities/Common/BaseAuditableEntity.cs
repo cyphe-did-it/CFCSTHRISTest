@@ -26,23 +26,28 @@ namespace HRIS.Domain.Entities.Common
 {
     public abstract class BaseAuditableEntity : BaseEntity
     {
-        public DateTimeOffset CreatedDate{ get; set; }
-        public string CreatedBy { get; set; } = string.Empty;
+        public DateTimeOffset CreatedDate{ get;  set; }
+        public string CreatedBy { get;  set; } = null!;
 
-        public DateTimeOffset? UpdatedDate { get; set; }
-        public string? UpdatedBy { get; set; }
+        public DateTimeOffset? UpdatedDate { get;  set; }
+        public string? UpdatedBy { get;  set; }
 
-        public DateTimeOffset? DeletedDate { get; set; }
-        public string? DeletedBy { get; set; }
+        public DateTimeOffset? DeletedDate { get;   set; }
+        public string? DeletedBy { get;  set; }
 
-        public bool IsActive { get; set; } = true;
+        public string? DeletedReason { get;  set; }
+
+        public bool IsActive { get;  set; } = true;
 
 
-        public void SoftDelete(string? user = null)
+        public void SoftDelete(string? user = null, string? reason = null)
         {
             IsActive = false;
             DeletedBy = user;
             DeletedDate = DateTimeOffset.UtcNow;
+            DeletedReason = reason;
+
+            MarkUpdated(user);
         }
 
         public void MarkUpdated(string? user = null)
