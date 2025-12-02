@@ -35,7 +35,7 @@ namespace HRIS.Application.Common.Interfaces
             CancellationToken cancellationToken
         );
 
-        Task<Employee?> GetEmployeeByIDIncludingInactiveAsync(
+        Task<Employee?> GetInactiveEmployeeByIDAsync(
             Guid employeeID,
             CancellationToken cancellationToken
         );

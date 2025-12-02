@@ -124,12 +124,13 @@ namespace HRIS.Infrastructure.Repositories.HRIS
         }
 
         // GET BY ID INCLUDING INACTIVE 
-        public async Task<Employee?> GetEmployeeByIDIncludingInactiveAsync(
+        public async Task<Employee?> GetInactiveEmployeeByIDAsync(
             Guid employeeID, CancellationToken cancellationToken
         )
         {
             return await _context.Employees
                 .IgnoreQueryFilters()
+                .Where(e => !e.IsActive)
                 .Include(e => e.CivilStatus)
                 .FirstOrDefaultAsync(e=> e.EmployeeID == employeeID, cancellationToken);
         }
