@@ -21,7 +21,7 @@ namespace HRIS.Application.Employees.Commands.CreateEmployee
             var newEmployee = new HRIS.Domain.Entities.Domain.HRIS.Employee
             {
                 EmployeeID = Guid.NewGuid(),
-                EmploymentID = request.EmploymentId,
+                EmploymentID = request.EmploymentID,
                 FirstName = request.FirstName,
                 MiddleName = request.MiddleName,
                 LastName = request.LastName,
@@ -29,7 +29,7 @@ namespace HRIS.Application.Employees.Commands.CreateEmployee
                 BirthDate = request.BirthDate,
                 BirthPlace = request.BirthPlace,
                 SexAtBirth = request.SexAtBirth,
-                CivilStatusID = request.CivilStatusId,
+                CivilStatusID = request.CivilStatusID,
                 IsFilipino = request.IsFilipino,
                 IsDualCitizen = request.IsDualCitizen,
                 ImageSource = request.ImageSource
