@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,20 +88,33 @@ namespace HRIS.Infrastructure.Persistence
             {
                 switch (entry.State)
                 {
+                    //case EntityState.Added:
+                    //    entry.Entity.CreatedDate = now;
+                    //    entry.Entity.CreatedBy ??= currentUser; // Replace with actual user ID
+                    //    entry.Entity.IsActive = true;
+                    //    break;
+                    //case EntityState.Modified:
+                    //    entry.Entity.UpdatedDate = now;
+                    //    entry.Entity.UpdatedBy ??= currentUser; // Replace with actual user ID
+                    //    break;
+                    //case EntityState.Deleted:
+                    //    entry.Entity.DeletedDate = now;
+                    //    entry.Entity.DeletedBy ??= currentUser; // Replace with actual user ID
+                    //    entry.Entity.IsActive = false;
+                    //    entry.State = EntityState.Modified; // Soft delete
+                    //    break;
+
                     case EntityState.Added:
-                        entry.Entity.CreatedDate = now;
-                        entry.Entity.CreatedBy ??= currentUser; // Replace with actual user ID
-                        entry.Entity.IsActive = true;
+                        entry.Entity.MarkCreated(currentUser);
                         break;
+
                     case EntityState.Modified:
-                        entry.Entity.UpdatedDate = now;
-                        entry.Entity.UpdatedBy ??= currentUser; // Replace with actual user ID
+                        entry.Entity.MarkUpdated(currentUser);
                         break;
+
                     case EntityState.Deleted:
-                        entry.Entity.DeletedDate = now;
-                        entry.Entity.DeletedBy ??= currentUser; // Replace with actual user ID
-                        entry.Entity.IsActive = false;
-                        entry.State = EntityState.Modified; // Soft delete
+                        entry.Entity.SoftDelete(currentUser);
+                        entry.State = EntityState.Modified;
                         break;
                 }
 

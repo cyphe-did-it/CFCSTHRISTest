@@ -27,7 +27,7 @@ namespace HRIS.Domain.Entities.Common
     public abstract class BaseAuditableEntity : BaseEntity
     {
         public DateTimeOffset CreatedDate{ get;  set; }
-        public string CreatedBy { get;  set; } = null!;
+        public string? CreatedBy { get;  set; }
 
         public DateTimeOffset? UpdatedDate { get;  set; }
         public string? UpdatedBy { get;  set; }
@@ -36,10 +36,22 @@ namespace HRIS.Domain.Entities.Common
         public string? DeletedBy { get;  set; }
 
         public string? DeletedReason { get;  set; }
+        public string? ReactivatedReason { get;  set; }
 
         public bool IsActive { get;  set; } = true;
 
 
+        public void MarkCreated(string? user = null)
+        {
+            CreatedBy = user;
+            CreatedDate = DateTimeOffset.UtcNow;
+            IsActive = true;
+        }
+        public void MarkUpdated(string? user = null)
+        {
+            UpdatedBy = user;
+            UpdatedDate = DateTimeOffset.UtcNow;
+        }
         public void SoftDelete(string? user = null, string? reason = null)
         {
             IsActive = false;
@@ -50,17 +62,14 @@ namespace HRIS.Domain.Entities.Common
             MarkUpdated(user);
         }
 
-        public void MarkUpdated(string? user = null)
-        {
-            UpdatedBy = user;
-            UpdatedDate = DateTimeOffset.UtcNow;
-        }
+        
 
-        public void Reactivate(string? user = null)
+        public void Reactivate(string? user = null, string? reason = null)
         {
             IsActive = true;
-            DeletedBy = user;
-            DeletedDate = DateTimeOffset.UtcNow;
+            ReactivatedReason = reason;
+            DeletedBy = null;
+            DeletedDate = null;
 
             MarkUpdated(user);
         }
