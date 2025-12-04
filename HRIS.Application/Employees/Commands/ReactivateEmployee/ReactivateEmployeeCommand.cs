@@ -10,5 +10,6 @@ namespace HRIS.Application.Employees.Commands.ReactivateEmployee
     public class ReactivateEmployeeCommand : IRequest<bool>
     {
         public Guid EmployeeID { get; set; }
+        public string? ReactivationReason { get; set; }
     }
 }

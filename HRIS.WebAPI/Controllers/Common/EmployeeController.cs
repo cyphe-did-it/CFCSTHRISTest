@@ -46,12 +46,12 @@ namespace HRIS.WebAPI.Controllers.Common
         // Query: Get by ID
         [HttpGet("{employeeId:guid}")]
         public async Task<ActionResult<EmployeeDetailDTO>> GetEmployeeById(
-            Guid employeeId,
+            Guid employeeID,
             CancellationToken cancellationToken)
         {
             var query = new GetEmployeeByIDQuery
             {
-                EmployeeID = employeeId
+                EmployeeID = employeeID
             };
 
             var result = await _mediator.Send(query, cancellationToken);
@@ -130,13 +130,13 @@ namespace HRIS.WebAPI.Controllers.Common
         // Command: Delete
         [HttpDelete("{employeeId:guid}")]
         public async Task<IActionResult> DeleteEmployee(
-            Guid employeeId,
+            Guid employeeID,
             [FromBody] DeleteEmployeeRequest request,
             CancellationToken cancellationToken)
         {
             var command = new DeleteEmployeeCommand
             {
-                EmployeeID = employeeId,
+                EmployeeID = employeeID,
                 DeletedReason = request.DeletedReason
             };
 
@@ -152,12 +152,14 @@ namespace HRIS.WebAPI.Controllers.Common
         // Command : Reactivate
         [HttpPost("{employeeId:guid}/reactivate")]
         public async Task<IActionResult> ReactivateEmployee(
-            Guid employeeId,
+            Guid employeeID,
+            [FromBody] ReactivateEmployeeRequest request,
             CancellationToken cancellationToken)
         {
             var command = new ReactivateEmployeeCommand
             {
-                EmployeeID = employeeId
+                EmployeeID = employeeID,
+                ReactivationReason = request.ReactivationReason
             };
             var result = await _mediator.Send(command, cancellationToken);
             if (!result)

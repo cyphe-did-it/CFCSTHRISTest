@@ -25,16 +25,14 @@ namespace HRIS.Application.Employees.Commands.ReactivateEmployee
             var employee = await _employeeRepository.GetInactiveEmployeeByIDAsync(request.EmployeeID, cancellationToken);
             if (employee == null)
             {
-                return false;   // Employee not found
+                return false; 
             }
-            employee.Reactivate("system"); // Assuming Reactivate is a method in Employee entity that sets IsActive to true
-
-            // This is temporary, replace "system" with actual user
+            employee.Reactivate("system", request.ReactivationReason);
             employee.MarkUpdated("system");
 
             await _employeeRepository.UpdateAsync(employee, cancellationToken);
             
-            return true; // Reactivation successful
+            return true; 
         }
     }
 }
