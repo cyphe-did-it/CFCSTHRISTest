@@ -39,7 +39,7 @@ namespace HRIS.Application.Employees.Queries.GetEmployees
             // Map Employee entities to EmployeeDTOs
             var employeeListDTOs = employees.Select(e => new EmployeeListDTO
             {
-                EmploymentId = e.EmploymentID,
+                EmploymentID = e.EmploymentID,
                 FirstName = e.FirstName,
                 MiddleName = e.MiddleName,
                 LastName = e.LastName,

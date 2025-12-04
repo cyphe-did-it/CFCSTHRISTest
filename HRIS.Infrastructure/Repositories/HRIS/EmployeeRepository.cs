@@ -19,11 +19,11 @@ namespace HRIS.Infrastructure.Repositories.HRIS
             _context = context;
         }
 
-        public async Task<Employee?> GetByIdAsync(Guid employeeId, CancellationToken cancellationToken)
+        public async Task<Employee?> GetByIdAsync(Guid employeeID, CancellationToken cancellationToken)
         { 
             return await _context.Employees
                     .Include(e => e.CivilStatus)
-                    .FirstOrDefaultAsync(e => e.EmployeeID == employeeId, cancellationToken);
+                    .FirstOrDefaultAsync(e => e.EmployeeID == employeeID, cancellationToken);
         }
 
         public async Task<IReadOnlyCollection<Employee>> GetAllAsync(CancellationToken cancellationToken)

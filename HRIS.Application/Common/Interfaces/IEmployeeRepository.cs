@@ -11,7 +11,7 @@ namespace HRIS.Application.Common.Interfaces
     {
         
         // READ
-        Task<Employee?> GetByIdAsync(Guid employeeId, CancellationToken cancellationToken);
+        Task<Employee?> GetByIdAsync(Guid employeeID, CancellationToken cancellationToken);
         Task<IReadOnlyCollection<Employee>> GetAllAsync(CancellationToken cancellationToken);
 
 

@@ -24,8 +24,8 @@ namespace HRIS.Application.Employees.DTOs
 {
     public class EmployeeListDTO
     {
-        public Guid EmployeeId { get; set; }
-        public string EmploymentId { get; set; } = null!;
+        public Guid EmployeeID { get; set; }
+        public string EmploymentID { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;

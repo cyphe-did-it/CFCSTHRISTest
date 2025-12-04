@@ -70,6 +70,7 @@ namespace HRIS.Domain.Entities.Common
             ReactivatedReason = reason;
             DeletedBy = null;
             DeletedDate = null;
+            DeletedReason = null;
 
             MarkUpdated(user);
         }

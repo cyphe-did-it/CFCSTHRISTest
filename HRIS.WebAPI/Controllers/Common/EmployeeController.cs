@@ -44,7 +44,7 @@ namespace HRIS.WebAPI.Controllers.Common
 
 
         // Query: Get by ID
-        [HttpGet("{employeeId:guid}")]
+        [HttpGet("{employeeID:guid}")]
         public async Task<ActionResult<EmployeeDetailDTO>> GetEmployeeById(
             Guid employeeID,
             CancellationToken cancellationToken)
@@ -90,7 +90,7 @@ namespace HRIS.WebAPI.Controllers.Common
         }
 
         // Command: Update
-        [HttpPut("{employeeId:guid}")]
+        [HttpPut("{employeeID:guid}")]
         public async Task<IActionResult> UpdateEmployee(
             Guid employeeId,
             [FromBody] UpdateEmployeeRequest request,
@@ -128,7 +128,7 @@ namespace HRIS.WebAPI.Controllers.Common
 
 
         // Command: Delete
-        [HttpDelete("{employeeId:guid}")]
+        [HttpDelete("{employeeID:guid}")]
         public async Task<IActionResult> DeleteEmployee(
             Guid employeeID,
             [FromBody] DeleteEmployeeRequest request,
@@ -150,7 +150,7 @@ namespace HRIS.WebAPI.Controllers.Common
         }
 
         // Command : Reactivate
-        [HttpPost("{employeeId:guid}/reactivate")]
+        [HttpPost("{employeeID:guid}/reactivate")]
         public async Task<IActionResult> ReactivateEmployee(
             Guid employeeID,
             [FromBody] ReactivateEmployeeRequest request,

@@ -28,10 +28,9 @@ namespace HRIS.Application.Employees.Queries.GetEmployeeByID
             }
             var employeeDetailDTO = new DTOs.EmployeeDetailDTO
             {
-                EmployeeId = employee.EmployeeID,
-                EmploymentId = employee.EmploymentID,
+                EmployeeID = employee.EmployeeID,
+                EmploymentID = employee.EmploymentID,
                 FirstName =  employee.FirstName,
-
                 MiddleName = employee.MiddleName,
                 LastName = employee.LastName,
                 ExtensionName = employee.ExtensionName,
