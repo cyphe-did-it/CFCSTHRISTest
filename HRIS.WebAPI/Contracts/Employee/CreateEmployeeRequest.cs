@@ -1,4 +1,6 @@
-﻿namespace HRIS.WebAPI.Contracts.Employee
+﻿using HRIS.Domain.Enums;
+
+namespace HRIS.WebAPI.Contracts.Employee
 {
     public class CreateEmployeeRequest
     {
@@ -6,7 +8,7 @@
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string? ExtensionName { get; set; }
+        public ExtensionName? ExtensionName { get; set; }
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; } = null!;
         public char SexAtBirth { get; set; }

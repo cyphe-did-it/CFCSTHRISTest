@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using HRIS.Domain.Enums;
+using MediatR;
 
 namespace HRIS.Application.Employees.Commands.CreateEmployee
 {
@@ -9,7 +10,7 @@ namespace HRIS.Application.Employees.Commands.CreateEmployee
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string? ExtensionName { get; set; }
+        public ExtensionName? ExtensionName { get; set; }       // using enum
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; } = null!;
         public char SexAtBirth { get; set; }

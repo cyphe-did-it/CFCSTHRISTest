@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRIS.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace HRIS.Application.Employees.DTOs
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string? ExtensionName { get; set; }
+        public ExtensionName? ExtensionName { get; set; }
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; } = null!;
         public char SexAtBirth { get; set; }

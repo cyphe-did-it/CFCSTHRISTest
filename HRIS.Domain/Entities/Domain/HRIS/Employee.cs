@@ -1,5 +1,6 @@
 ﻿using HRIS.Domain.Entities.Common;
 using HRIS.Domain.Entities.Domain.Lookup;
+using HRIS.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace HRIS.Domain.Entities.Domain.HRIS
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string? ExtensionName { get; set; }
+        public ExtensionName? ExtensionName { get; set; }
 
         public DateTime BirthDate { get; set; }
         public string BirthPlace { get; set; } = null!;

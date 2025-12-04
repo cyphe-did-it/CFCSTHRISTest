@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using HRIS.Domain.Enums;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,15 @@ namespace HRIS.Application.Employees.Commands.CreateEmployee
 {
     public class CreateEmployeeCommandValidator : AbstractValidator<CreateEmployeeCommand>
     {
+        private static readonly ExtensionName[] AllowedExtensions =
+            Enum.GetValues<ExtensionName>()       
+                .Where(n => n != ExtensionName.None)
+                .ToArray();
+
         public CreateEmployeeCommandValidator()
         {
+            
+            
             RuleFor(x => x.EmploymentID)
                 .NotEmpty().WithMessage("Employment ID is required.")
                 .Matches(@"^CFCST-\d{4}-d{4}$:")
@@ -44,6 +53,12 @@ namespace HRIS.Application.Employees.Commands.CreateEmployee
             RuleFor(x => x.LastName)
                 .NotEmpty().WithMessage("Last Name is required.")
                 .MaximumLength(100).WithMessage("Last Name cannot exceed 100 characters.");
+
+            RuleFor(x => x.ExtensionName)
+                .Must(ext =>
+                    !ext.HasValue || AllowedExtensions.Contains(ext.Value))          
+                .WithMessage("ExtensionName must be one of: Jr, Sr, III, IV, V, VI.");
+
 
             RuleFor(x => x.BirthDate)
                 .NotEmpty().WithMessage("Birth Date is required.")

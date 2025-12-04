@@ -33,6 +33,7 @@ namespace HRIS.Infrastructure.Persistence.Configurations.HRIS
                 .HasMaxLength(100);
 
             builder.Property(e => e.ExtensionName)
+                .HasConversion<string>()    // storing enum as string
                 .HasMaxLength(10);
 
 

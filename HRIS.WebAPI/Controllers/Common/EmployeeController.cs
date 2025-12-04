@@ -70,7 +70,7 @@ namespace HRIS.WebAPI.Controllers.Common
         {
             var command = new CreateEmployeeCommand
             {
-                EmploymentId = request.EmploymentID,
+                EmploymentID = request.EmploymentID,
                 FirstName = request.FirstName,
                 MiddleName = request.MiddleName,
                 LastName = request.LastName,
@@ -78,7 +78,7 @@ namespace HRIS.WebAPI.Controllers.Common
                 BirthDate = request.BirthDate,
                 BirthPlace = request.BirthPlace,
                 SexAtBirth = request.SexAtBirth,
-                CivilStatusId = request.CivilStatusID,
+                CivilStatusID = request.CivilStatusID,
                 IsFilipino = request.IsFilipino,
                 IsDualCitizen = request.IsDualCitizen,
                 ImageSource = request.ImageSource

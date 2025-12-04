@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using HRIS.Domain.Enums;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace HRIS.Application.Employees.Commands.UpdateEmployee
         public string FirstName { get; set; } = null!;
         public string? MiddleName { get; set; }
         public string LastName { get; set; } = null!;
-        public string? ExtensionName { get; set; }
+        public ExtensionName? ExtensionName { get; set; }
 
 
         public DateTime BirthDate { get; set; }
